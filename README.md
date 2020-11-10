@@ -1,2 +1,2 @@
-# HighVoltageAnalog
-another 14 segment display project
+# 14-Segment-Rev-2
+an old school looking text display
