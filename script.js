@@ -1,21 +1,19 @@
-//TODO
-// handling for strings that are longer than the number of display modules
-
-// challenges:
+// TODO
 // never break a word across a page
 // never start a page with a space
 // never start a line with a space
-// scale duration to size of display
-// read from a file
-// read from Spotify
+// manually advance text pages on click
 
 //TODO
 // Module OFF animation
 
 //TODO
 // scaleable modules rather than fixed pixel dimensions
+// do it with css variables
 
 const gridContainer = document.querySelector('.gridContainer');
+const backButton = document.querySelector('.backButton');
+const fwdButton = document.querySelector('.fwdButton');
 
 function createDisplay(moduleCount) {
 
@@ -28,8 +26,7 @@ function createDisplay(moduleCount) {
 		for (let i = 0; i < 4; i++) {
 			let layer = document.createElement('div');
 			charContainer.appendChild(layer);
-			layer.classList.add(`layer`, `layer-${i}`);
-			charContainer.appendChild(layer);
+			layer.classList.add(`layer`, `layer-${i}`);			
 		}
 	}	
 	applyLEDBackground();
@@ -37,31 +34,70 @@ function createDisplay(moduleCount) {
 }
 
 function applyLEDBackground() {
-	LEDBackgrounds = Array.from(document.querySelectorAll('.layer-0'));
+	const LEDBackgrounds = Array.from(document.querySelectorAll('.layer-0'));
 	LEDBackgrounds.forEach( background => background.textContent = '~');
 }
 
-function writeString(writeThis) {
-	clearDisplay();
-	let stringIndex = 0;
+let pageDone = false; // need this global variable as feedback from setTimeout callbacks
+let currentPage = 0;	// couldn't find a way to get this out of global scope either
 
-	if (writeThis.length > charContainers.length) {
-		writeThis = "error";
+function updateButtonStatus() {
+	if (pageDone) {
+		fwdButton.classList.add('ready');
+		if (currentPage > 0) backButton.classList.add('ready');
+	} else {
+		fwdButton.classList.remove('ready');	
+		backButton.classList.remove('ready');
 	}
+}
 
-	const timerId = setInterval(writeNextChar, 50);
-	function writeNextChar() {	
-		layers = Array.from(charContainers[stringIndex].children);
-		layers.shift();
-		layers.forEach(layer => layer.textContent=writeThis[stringIndex]);
-		layers[2].classList.add('on');		
-
-		stringIndex++;	
-		if (stringIndex === writeThis.length) {
-			clearInterval(timerId);
+function handleText(inputFull) {	
+	const pageLength = charContainers.length;
+	const pagesArr = [];
+	for (let i=0; i < inputFull.length; i+= charContainers.length) {
+		pagesArr.push(inputFull.slice(i,charContainers.length+i));	
+	}
+	fwdButton.addEventListener('click', () => {
+		if (pageDone) {
+			pageDone = false;
+			backButton.classList.add('ready');
+			updateButtonStatus();					
+			currentPage += (currentPage === pagesArr.length-1) ? -(pagesArr.length-1) : 1;
+			writePage(pagesArr[currentPage]);
 		}
-	}
+	});
+	backButton.addEventListener('click', () => {
+		if (pageDone && currentPage > 0) {
+			pageDone = false;			
+			updateButtonStatus();
+			currentPage += (currentPage === 0) ? 0 : -1;
+			writePage(pagesArr[currentPage]);
+		}
+	});		
+	writePage(pagesArr[currentPage]);	
+}
 
+function writePage(textPage) {
+	clearDisplay();
+	const ms = 100;
+	setTimeout(() => {
+			pageDone = true;
+			updateButtonStatus();		
+			console.log("done");
+		}, ms * textPage.length);	
+	if (textPage.length > charContainers.length) textPage = "Page Overflow";
+	const textPageArr = Array.from(textPage);
+	textPageArr.forEach((char, i) => {
+		setTimeout(writeChar, ms*(i+1), char, i);			
+	})	 
+}
+
+// write a single character at a specified position in the display
+function writeChar(char, charModuleIndex) {
+	const moduleLayers = Array.from(charContainers[charModuleIndex].children);
+	moduleLayers.shift();
+	moduleLayers.forEach(layer => layer.textContent = char);
+	moduleLayers[2].classList.add('on');	
 }
 
 function clearDisplay() {
@@ -73,42 +109,15 @@ function clearDisplay() {
 	})
 }
 
-function writeLong(longString) {
-	// pass in longer strings and display them in chunks according to the length of
-	// charContainers, ie, how many modules there are
-	if (longString.length < charContainers.length) {
-		writeString(longString);
-		return;
-	} else {
-		// pass in slices of longString until the entire thing has been displayed
-		let sliceLength = charContainers.length;
-		let startIndex = 0;
-		let endIndex = sliceLength;
-		writeNextSlice();
-		const timerIdLongString = setInterval(writeNextSlice, 2250)
-		function writeNextSlice() {
-			if (startIndex >= longString.length) {
-				clearInterval(timerIdLongString);				
-				return;
-			}
-			writeString(longString.slice(startIndex,endIndex));
-			startIndex += sliceLength;
-			endIndex += sliceLength;
-			
-		}
-		
-	}
-}
+
 //================================DRIVER PROGRAM=====================================//
 // create the desired number of 14 segment display modules
-const charContainers = createDisplay(32);
-writeLong("_ high voltage analog is better-");
+const charContainers = createDisplay(64);
+// writeLong("Mandrake, I suppose it never occured to you.");
+handleText("Mandrake, I suppose it never occured to you that while we're chatting here so enjoyably, a decision is being made by the president and the joint chiefs in the war room at the pentagon when. they realize there is no possibility of recalling the wing, there'll be only one course of action open.  Total comittment.  Mandrake, do you recall what clemenceau once said about war?  He said war was too important to be left to the generals.  When he said that, 50 years ago, he might have been right.  But today, war is to important to be left to politicians.  They have neither the time, the training, nor the inclination for strategic thought.  I can no longer sit back and allow communist infiltration, communist indoctrination, communist subversion, and the international communist conspiracy to sap and impurify all of our precious bodily fluids.");
+
 //==============================END DRIVER PROGRAM===================================//
 
 
-
-
-
-
-
+// 
 

@@ -1,3 +1,8 @@
+@font-face {
+	font-family: "DSEG14";
+	src: url("/DSEG14Classic-Regular.woff") format("woff");
+}
+
 * {
 	margin: 0;
 }
@@ -6,11 +11,22 @@ body {
 	display: flex;
 	justify-content: center;
 	background: linear-gradient(to right, rgb(25, 31, 46), rgb(45, 14, 11));
-	font-family: "DSEG14ClassicRegular";
+	font-family: "DSEG14";
 }
+
+.masterContainer {
+
+}
+
+.controlContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .gridContainer {
-	margin-top: 10vh;
-	margin-bottom: 10vh;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
@@ -26,10 +42,38 @@ body {
 	align-items: center;
 	background-color: #08090e;
 	border: 0.07em solid #333641;
-	width: 80px;
-	height: 100px;
-	/*font-size: 5em;	*/
-	font-size: 5rem;	
+	width: 40px;
+	height: 50px;	
+	font-size: 40px;	
+}
+
+button {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #08090e;
+	border: 0.07em solid #333641;
+	width: 40px;
+	height: 40px;	
+	font-size: 40px;	
+}
+
+button {
+	color: #121317;
+	transition: transform, margin 0.1s;
+	transition-timing-function: cubic-bezier(0, 3.03, 0.1, 0.97);	
+}
+
+button:focus {
+	outline: none;
+}
+
+.ready {	
+	transform: scale(1.05);
+	margin: 5px;
+	background-color: #5a3c58;
+	color: #744886;		
 }
 
 .layer {
@@ -45,8 +89,7 @@ body {
 .layer-1 {
 	z-index: 1;
 	color: #ff00bc;
-	/*text-shadow: #5d0e0e73 0px 0px 5px,
-		#ff0000 0px 0px 50px;*/
+	
 }
 
 .layer-2 {
@@ -84,7 +127,7 @@ body {
 
   25% {
   	color: #ff99e4;
-  	text-shadow: 0 0 0px #5d0e0e73, 0 0 2vw #ff0000;
+  	text-shadow: 0 0 0px #5d0e0e73, 0 0 10px #ff0000;
 
   }
     100% {
