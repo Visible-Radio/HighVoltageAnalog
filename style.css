@@ -14,10 +14,6 @@ body {
 	font-family: "DSEG14";
 }
 
-.masterContainer {
-
-}
-
 .controlContainer {
 	display: flex;
 	justify-content: center;
@@ -29,11 +25,17 @@ body {
 	margin-bottom: 10px;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: flex-start;
+	justify-content: center;
 	align-content: flex-start;
 	width: 90vw;
 	height: auto;
+	z-index: -1;	
 }
+
+
+/*variables
+
+*/
 
 .charContainer {
 	position: relative;
@@ -41,10 +43,22 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: #08090e;
-	border: 0.07em solid #333641;
+	border: 1px solid #333641;	
+	outline: 2px solid #08090e;
+	margin: 5px;
 	width: 40px;
 	height: 50px;	
 	font-size: 40px;	
+}
+
+.charContainer:before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  width: 40px;
+	height: 50px;
+  border: 5px solid #333641;
+  box-shadow: 0 0 0 1px #08090e;
 }
 
 button {
@@ -54,9 +68,9 @@ button {
 	align-items: center;
 	background-color: #08090e;
 	border: 0.07em solid #333641;
-	width: 40px;
-	height: 40px;	
-	font-size: 40px;	
+	width: 20px;
+	height: 20px;	
+	font-size: 20px;	
 }
 
 button {
@@ -93,27 +107,28 @@ button:focus {
 }
 
 .layer-2 {
-	top: 5px;
-	left: 5px;
+	left: 0.07em;
+	top: 0.07em;
 	z-index: 1;	
 	color: #6d3773;
 	mix-blend-mode: subtract;
-	filter: blur(2px);
-	opacity: 0.5;
+	/*filter: blur(2px);*/
+	opacity: 0.25;
 
 }
 
-.layer-3 {	
+.layer-3 {
+	right: 0.07em;	
+	bottom: 0.07em;	
 	z-index: 1;	
-	color: #8500ff;
-	mix-blend-mode: screen;
-	filter: blur(15px);
-	opacity: 0.6;
-
+	color: #8500ff;	
+	mix-blend-mode: subtract;	
+	opacity: 0.25;
 }
 
 .on {
-  animation: glow 0.5s cubic-bezier(0, 3.85, 0, 0.98) 1;
+	/*cubic-bezier(0, 3.85, 0, 0.98)*/
+  animation: glow 0.5s cubic-bezier(0, 3.85, 0, 1) 1;
   animation-fill-mode: forwards;
 }
 
@@ -125,14 +140,13 @@ button:focus {
     text-shadow: none;
   }
 
-  25% {
+  50% {
   	color: #ff99e4;
-  	text-shadow: 0 0 0px #5d0e0e73, 0 0 10px #ff0000;
+  	text-shadow: 0 0 0.1em #5d0e0e, 0 0 0.1em #ff0000;
 
   }
     100% {
-    color: #ff00bc;
-    opacity: 0, 0.75;
-    text-shadow: none;
+    color: #ff00bc;    
+    text-shadow: 0 0 0.05em #5d0e0e50, 0 0 0.1em #ff000050;
   }
 }

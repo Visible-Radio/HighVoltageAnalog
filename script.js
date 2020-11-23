@@ -1,15 +1,9 @@
-// TODO
-// never break a word across a page
-// never start a page with a space
-// never start a line with a space
-// manually advance text pages on click
-
-//TODO
-// Module OFF animation
-
 //TODO
 // scaleable modules rather than fixed pixel dimensions
 // do it with css variables
+
+//TODO
+// don't write a space at the begining of a row
 
 const gridContainer = document.querySelector('.gridContainer');
 const backButton = document.querySelector('.backButton');
@@ -96,25 +90,27 @@ function writePage(textPage) {
 function writeChar(char, charModuleIndex) {
 	const moduleLayers = Array.from(charContainers[charModuleIndex].children);
 	moduleLayers.shift();
-	moduleLayers.forEach(layer => layer.textContent = char);
-	moduleLayers[2].classList.add('on');	
+	moduleLayers.forEach(layer => {
+	  layer.textContent = char;
+		layer.classList.add('on');});
 }
 
 function clearDisplay() {
 	charContainers.forEach((container) => {
 		layers = Array.from(container.children);
 		layers.shift();
-		layers.forEach(layer => layer.textContent='');
-		layers[2].classList.remove('on');
+		layers.forEach(layer => {
+			layer.classList.remove('on');
+			layer.textContent=''});
 	})
 }
 
 
 //================================DRIVER PROGRAM=====================================//
 // create the desired number of 14 segment display modules
-const charContainers = createDisplay(64);
+const charContainers = createDisplay(40);
 // writeLong("Mandrake, I suppose it never occured to you.");
-handleText("Mandrake, I suppose it never occured to you that while we're chatting here so enjoyably, a decision is being made by the president and the joint chiefs in the war room at the pentagon when. they realize there is no possibility of recalling the wing, there'll be only one course of action open.  Total comittment.  Mandrake, do you recall what clemenceau once said about war?  He said war was too important to be left to the generals.  When he said that, 50 years ago, he might have been right.  But today, war is to important to be left to politicians.  They have neither the time, the training, nor the inclination for strategic thought.  I can no longer sit back and allow communist infiltration, communist indoctrination, communist subversion, and the international communist conspiracy to sap and impurify all of our precious bodily fluids.");
+handleText("Mandrake, I suppose it never occured to you that while we're chatting here so enjoyably, a decision is being made by the president and the joint chiefs in the war room at the pentagon when they realize there is no possibility of recalling the wing, there'll be only one course of action open. Total comittment. Mandrake, do you recall what clemenceau once said about war? He said war was too important to be left to the generals. When he said that, 50 years ago, he might have been right. But today, war is too important to be left to politicians. They have neither the time, the training, nor the inclination for strategic thought. I can no longer sit back and allow communist infiltration, communist indoctrination, communist subversion, and the international communist conspiracy to sap and impurify all of our precious bodily fluids.");
 
 //==============================END DRIVER PROGRAM===================================//
 
