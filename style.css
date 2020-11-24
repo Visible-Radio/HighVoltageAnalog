@@ -8,9 +8,17 @@
 	margin: 0;
 }
 
+:root {
+	/*master size control for all elements sized by rem*/
+	font-size: 2.75vmin;
+}
+
 body {
 	display: flex;
 	justify-content: center;
+	height: 100vh;
+	align-items: center;
+	align-content: center;
 	background: linear-gradient(to right, rgb(25, 31, 46), rgb(45, 14, 11));
 	font-family: "DSEG14";
 }
@@ -18,25 +26,22 @@ body {
 .controlContainer {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center;	
 }
 
-.gridContainer {
-	margin-top: 10px;
-	margin-bottom: 10px;
+.gridContainer {	
+	margin-top: 0.625rem;
+	margin-bottom: 0.625rem;
+	/*margin-top: 10px;
+	margin-bottom: 10px;*/
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	align-content: flex-start;
-	width: 90vw;
+	align-content: center;	
+	max-width: 95vw;
 	height: auto;
 	z-index: -1;	
 }
-
-
-/*variables
-
-*/
 
 .charContainer {
 	position: relative;
@@ -44,22 +49,29 @@ body {
 	justify-content: center;
 	align-items: center;
 	background-color: #08090e;
-	border: 1px solid #333641;	
-	outline: 2px solid #08090e;
-	margin: 5px;
-	width: 40px;
-	height: 50px;	
-	font-size: 40px;	
+	border: 0.0625rem solid #333641;	
+	/*1 px = 0.0625rem	*/
+	outline: 0.125rem solid #08090e;
+	/*2 px = 0.125rem*/
+	margin: 0.3125rem;
+	/*5 px = 0.3125rem*/
+	width: 2.5rem;
+	/*40px =2.5rem */
+	height: 3.125rem;
+	/*50px =3.125rem */	
+	font-size: 2.5rem;	
 }
 
 .charContainer:before {
   content: " ";
   position: absolute;
   z-index: -1;
-  width: 40px;
-	height: 50px;
-  border: 5px solid #333641;
-  box-shadow: 0 0 0 1px #08090e;
+  width: 2.5rem;
+	/*40px =2.5rem */
+	height: 3.125rem;
+	/*50px =3.125rem */	
+  border: 0.3125rem solid #333641;
+  box-shadow: 0 0 0 0.0625rem #08090e;
 }
 
 button {
@@ -69,9 +81,9 @@ button {
 	align-items: center;
 	background-color: #08090e;
 	border: 0.07em solid #333641;
-	width: 20px;
-	height: 20px;	
-	font-size: 20px;	
+	width: 1.25rem;
+	height: 1.25rem;	
+	font-size: 1.25rem;	
 }
 
 button {
@@ -86,7 +98,7 @@ button:focus {
 
 .ready {	
 	transform: scale(1.05);
-	margin: 5px;
+	margin: 0.3125rem;
 	background-color: #5a3c58;
 	color: #744886;		
 }
@@ -112,8 +124,7 @@ button:focus {
 	top: 0.07em;
 	z-index: 1;	
 	color: #6d3773;
-	mix-blend-mode: subtract;
-	/*filter: blur(2px);*/
+	mix-blend-mode: subtract;	
 	opacity: 0.25;
 
 }
@@ -127,8 +138,7 @@ button:focus {
 	opacity: 0.25;
 }
 
-.on {
-	/*cubic-bezier(0, 3.85, 0, 0.98)*/
+.on {	
   animation: glow 0.5s cubic-bezier(0, 3.85, 0, 1) 1;
   animation-fill-mode: forwards;
 }
