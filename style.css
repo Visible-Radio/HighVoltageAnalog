@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "DSEG14";
-	src: url("/DSEG14Classic-Regular.woff") format("woff");
+	src: url("./DSEG14Classic-Regular.woff") format("woff");
 }
 
 * {
