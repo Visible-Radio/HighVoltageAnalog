@@ -6,16 +6,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="masterContainer">
+
+	<div class="masterContainer">		
 		<div class="gridContainer">
 			<!-- display divs get appended here -->
-
 		</div>		
 		<div class="controlContainer">
+			<div class="progressContainer">
+				<span>Message Progress</span>
+				<div class="progress">
+					<!-- progressDots get appended here -->
+				</div>
+			</div>	
+			<div class="moduleControl">				
+				<button class="valueButton">1</button>
+				<button class="valueButton">3</button>
+				<button class="valueButton">5</button>
+				<button class="valueButton">7</button>
+				<button class="valueButton">20</button>
+				<button class="appendButton">+</button>
+				<button class="removeButton">-</button>				
+			</div>
 			<button class="backButton"><</button>
 			<button class="fwdButton">></button>
 		</div>
 	</div>		
+
 	<script src="./script.js"></script>
 </body>  
 </html>

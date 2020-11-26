@@ -5,12 +5,13 @@
 }
 
 * {
-	margin: 0;
+	margin: 0;	
 }
 
 :root {
 	/*master size control for all elements sized by rem*/
 	font-size: 2.75vmin;
+
 }
 
 body {
@@ -23,17 +24,27 @@ body {
 	font-family: "DSEG14";
 }
 
+.masterContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;	
+	max-width: 95vw;
+	justify-content: center;
+	align-items: center;
+}
+
 .controlContainer {
 	display: flex;
-	justify-content: center;
-	align-items: center;	
+	justify-content: flex-end;
+	align-items: center;
+	max-width: 95vw;
+	min-height: 2.75rem;
+	padding: 0 0.5rem;	
 }
 
 .gridContainer {	
 	margin-top: 0.625rem;
 	margin-bottom: 0.625rem;
-	/*margin-top: 10px;
-	margin-bottom: 10px;*/
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
@@ -43,22 +54,17 @@ body {
 	z-index: -1;	
 }
 
-.charContainer {
+.charContainer {	
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #08090e;
-	border: 0.0625rem solid #333641;	
-	/*1 px = 0.0625rem	*/
+	border: 0.0625rem solid #333641;		
 	outline: 0.125rem solid #08090e;
-	/*2 px = 0.125rem*/
 	margin: 0.3125rem;
-	/*5 px = 0.3125rem*/
 	width: 2.5rem;
-	/*40px =2.5rem */
 	height: 3.125rem;
-	/*50px =3.125rem */	
 	font-size: 2.5rem;	
 }
 
@@ -67,15 +73,25 @@ body {
   position: absolute;
   z-index: -1;
   width: 2.5rem;
-	/*40px =2.5rem */
 	height: 3.125rem;
-	/*50px =3.125rem */	
   border: 0.3125rem solid #333641;
   box-shadow: 0 0 0 0.0625rem #08090e;
 }
 
-button {
-	position: relative;
+.big {
+	transition: transform 0.1s;
+	transform: scale(1.25);
+	z-index: 2;
+	margin: 0.5rem;	
+}
+
+.big > * {	
+	transition: transform 0.1s;	
+	transform: scale(1.25);
+	z-index: 2;
+}
+
+button {	
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -84,23 +100,63 @@ button {
 	width: 1.25rem;
 	height: 1.25rem;	
 	font-size: 1.25rem;	
-}
-
-button {
 	color: #121317;
 	transition: transform, margin 0.1s;
-	transition-timing-function: cubic-bezier(0, 3.03, 0.1, 0.97);	
+	transition-timing-function: cubic-bezier(0, 3.03, 0.1, 0.97);
+	margin: 0.1rem;
 }
 
 button:focus {
 	outline: none;
 }
 
+.moduleControl {
+	display: flex;
+	margin: 0.5rem;		
+}
+
+.valueButton, .appendButton, .removeButton {
+	font-size: 0.75rem;
+	color: #333641;
+	border-radius: 0.5rem;	
+}
+
 .ready {	
 	transform: scale(1.05);
-	margin: 0.3125rem;
+	margin: 0 0.3125rem;
 	background-color: #5a3c58;
 	color: #744886;		
+}
+
+.progressContainer {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: center;
+	font-size: 0.5rem;
+	font-family: sans-serif;
+	color: #333641;
+	background-color: #08090e;
+	border: 0.1rem solid #08090e;
+	border-radius: 0.3rem;
+}
+
+.progress {	
+	height: 0.5rem;	
+	width: 6.2rem;		
+	background-color: #333641;	
+	border-radius: 0.4rem;
+}
+
+.progressDot {		
+	display: inline-block;
+	width: 0.2rem;
+	height: 0.2rem;
+	border-radius: 50%;
+	background-color: #121317;
+	margin-top:0.2rem;
+	margin-bottom: 0.60rem;
+	margin-left: 0.2rem;
+	margin-right: 0.2rem;
 }
 
 .layer {
@@ -146,18 +202,43 @@ button:focus {
 @keyframes glow {
   
   0% {
-    color: #ff99e4;
+    color: #ff99e4;    
     opacity: 0;
     text-shadow: none;
   }
 
   50% {
-  	color: #ff99e4;
+  	color: #ff99e4;  	
   	text-shadow: 0 0 0.1em #5d0e0e, 0 0 0.1em #ff0000;
 
   }
     100% {
-    color: #ff00bc;    
+    color: #ff00bc;        
     text-shadow: 0 0 0.05em #5d0e0e50, 0 0 0.1em #ff000050;
+  }
+}
+
+.dotOn {	
+  animation: dotGlow 0.5s cubic-bezier(0, 3.85, 0, 1) 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dotGlow {
+  
+  0% {
+    background-color: #ff99e4;    
+    opacity: 0;
+    box-shadow: none;
+  }
+
+  10% {
+  	background-color: #ff99e4;  	
+  	box-shadow: 0 0 0.15rem 0.15rem #ff99e4;	
+
+  }
+    100% {
+    background-color: #cf55bc;
+    box-shadow: 0 0 0.1rem 0.1rem #ff00bca0;        
+    
   }
 }
